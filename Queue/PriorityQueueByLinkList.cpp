@@ -70,7 +70,7 @@ int main()
 {  
     int choice, data, priority;  
     
-	printf("\n Priority Order : Low Number High Priority")
+	printf("Priority Order : Low Number High Priority\n");
 	do  
     {  
         printf("1.Insert\n");  

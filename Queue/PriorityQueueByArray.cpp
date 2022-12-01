@@ -29,10 +29,10 @@ void enqueue(int data, int priority)
 
 int peek()
 {
-	int maxPriority = INT_MIN , indxPos= -1;
+	int maxPriority = INT_MAX , indxPos= -1;
 	for(int i = 0; i<=indx;i++)
 	{
-		if(maxPriority < pq[i].order) 
+		if(maxPriority > pq[i].order) 
 		{
             maxPriority = pq[i].order;
             indxPos = i;
