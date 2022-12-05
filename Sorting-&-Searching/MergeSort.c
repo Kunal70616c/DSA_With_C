@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include<math.h>
+#define MAX 100
 
 
 void simpleMerge(int *arr,int lb,int mid,int ub)
@@ -27,38 +29,33 @@ void simpleMerge(int *arr,int lb,int mid,int ub)
     {
         while(j<=ub)
         {
-            b[k]=arr[j];j++;k++;
+            b[k]=arr[j];
+			j++;
+			k++;
         }
     }
     else
     {
         while(i<=mid)
         {
-            b[k]=arr[i];i++;k++;
+            b[k]=arr[i];
+			i++;
+			k++;
         }
     }
     for(k=lb;k<=ub;k++)
     {
         arr[k]=b[k];
     }
+    
 }
-
-void printArray(int A[], int size)
-{
-	int i;
-	for (i = 0; i < size; i++)
-		printf("%d ", A[i]);
-	printf("\n");
-}
-
-
 
 void mergeSort(int *arr,int lb, int ub)
 {
 	if (lb < ub)
 	{
 		
-		int mid = lb + (ub - lb) / 2;
+		int mid = (lb + ub) / 2;
 		mergeSort(arr, lb, mid);
 		mergeSort(arr, mid + 1, ub);
 		simpleMerge(arr, lb, mid, ub);
@@ -68,23 +65,31 @@ void mergeSort(int *arr,int lb, int ub)
 
 int main()
 {
-	int arr[10],size,j;
+	int arr[MAX],size,j,i;
 	
 	printf("\n Enter Size Of Array:");
 	scanf("%d",&size);
 	for(j = 0; j < size ; j++)
 	{
-		printf("\n Enter %d -th Element:",j);
+		printf("\n Enter %d th Element:",j);
 		scanf("%d",&arr[j]);
 	}
 
-	printf("Given array is \n");
-	printArray(arr, size);
+	printf(" Input Array ==>> ");
+	for(i = 0;i< size; i++)
+	{
+		printf("%d ",arr[i]);
+	}
 
-	mergeSort(arr, 0, size - 1);
 
-	printf("\nSorted array is \n");
-	printArray(arr, size);
+	printf("\n Sorted Input Array ===>> ");
+
+	mergeSort(arr, 0, size-1);
+	
+	for(i = 0;i< size; i++)
+	{
+		printf("%d ",arr[i]);
+	}
 	return 0;
 }
 

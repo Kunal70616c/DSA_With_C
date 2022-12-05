@@ -46,7 +46,7 @@ int main()
 					arr[pos] = temp; 
 				}
 			}		
-			printf("\nShorted Array >>>>");
+			printf("\nSorted Array >>>>");
 			for(i=0;i<n;i++)
 			{
 				printf("%d ",arr[i]);
