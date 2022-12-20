@@ -1,9 +1,10 @@
 #include<stdio.h>
-#include<string.h>
+#include<String.h>
+#include<Ctype.h>
 #define MAX 100
 
-char stack[MAX];
-int top = -1;
+char stack[MAX],prefix[MAX];
+int top = -1 ,top2=-1;
 
 void push(char x)
 {
@@ -19,20 +20,6 @@ char pop()
 	}	
 }
 
-//char *strRev(char *exp)
-//{
-//	char *ptr1=exp,*ptr2;
-//	while(*ptr1!='\0')
-//		ptr1++;
-//	while(*ptr1!=*exp)
-//	{
-//		*ptr2 = *ptr1;
-//		ptr2++;
-//		ptr1--;
-//	}
-//	return *ptr2;
-//}
-
 int prc(char x)
 {
 	if(x ==')')
@@ -45,13 +32,13 @@ int prc(char x)
 		return 1; 
 }
 
-int isChar(char x)
-{
-	if(x>='A' && x<='Z')
-		return 1;
-	else
-		return 0;
-}
+//int isChar(char x)
+//{
+//	if(x>='A' && x<='Z')
+//		return 1;
+//	else
+//		return 0;
+//}
 
 int main()
 {
@@ -61,11 +48,13 @@ int main()
 
 	printf("\n Enter Exp. =");
 	scanf("%s",exp);
-	*ptr=strrev(exp);
+	strrev(exp);
+	ptr=exp;
 	while(*ptr!='\0')
 	{
-		if(isChar(*ptr)==1)
-			printf("%c",*ptr);
+		if(isalnum(*ptr))
+			//printf("%c",*ptr);
+			prefix[++top2]=*ptr;
 		else if(*ptr==')')
 			push(*ptr);
 		else if(*ptr=='(')
@@ -75,15 +64,15 @@ int main()
 					data = pop();
 					if(data == ')' )
 						break;	
-					printf("%c",data);
+					prefix[++top2]=data;
 				}
 		}
 		else
 		{
-			while(prc(stack[top]) <= prc(*ptr))
+			while(prc(stack[top]) > prc(*ptr))
 			{
 				data = pop();
-				printf("%c",data);
+				prefix[++top2]=data;
 			}
 			push(*ptr);
 		}	
@@ -92,9 +81,9 @@ int main()
 	while(top!= -1)
 	{
 		data = pop();
-		printf("%c",data);	
+		prefix[++top2]=data;	
 	}
+	printf("\nPrefix Exp -> \n");
+		printf("%s",strrev(prefix));
 	return 0;
 }
-
-

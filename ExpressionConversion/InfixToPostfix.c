@@ -1,9 +1,10 @@
 #include<stdio.h>
 #include<String.h>
+#include<Ctype.h>
 #define MAX 100
 
-char stack[MAX];
-int top = -1;
+char stack[MAX],postfix[MAX];
+int top = -1 ,top2=-1;
 
 void push(char x)
 {
@@ -31,13 +32,7 @@ int prc(char x)
 		return 1; 
 }
 
-int isChar(char x)
-{
-	if(x>='A' && x<='Z')
-		return 1;
-	else
-		return 0;
-}
+
 
 int main()
 {
@@ -50,8 +45,9 @@ int main()
 	ptr=exp;
 	while(*ptr!='\0')
 	{
-		if(isChar(*ptr)==1)
-			printf("%c",*ptr);
+		if(isalnum(*ptr))
+			//printf("%c",*ptr);
+			postfix[++top2]=*ptr;
 		else if(*ptr=='(')
 			push(*ptr);
 		else if(*ptr==')')
@@ -61,7 +57,7 @@ int main()
 					data = pop();
 					if(data == '(' )
 						break;	
-					printf("%c",data);
+					postfix[++top2]=data;
 				}
 		}
 		else
@@ -69,7 +65,7 @@ int main()
 			while(prc(stack[top]) >= prc(*ptr))
 			{
 				data = pop();
-				printf("%c",data);
+				postfix[++top2]=data;
 			}
 			push(*ptr);
 		}	
@@ -78,9 +74,12 @@ int main()
 	while(top!= -1)
 	{
 		data = pop();
-		printf("%c",data);	
+		postfix[++top2]=data;	
+	}
+	printf("\nPostfix Exp -> \n");
+	for(i=0;i<=top2;i++)
+	{
+		printf("%c",postfix[i]);
 	}
 	return 0;
 }
-
-
